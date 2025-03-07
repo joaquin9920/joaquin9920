@@ -2,70 +2,82 @@
 
 import { db, collection, addDoc, getDocs } from "./firebase.js";
 
-// Función para guardar un anuncio en Firestore
+// API Key de OpenWeather (ejemplo gratuita, debes usar la tuya en producción)
+const weatherApiKey = "b6907d289e10d714a6e88b30761fae22";  // Ejemplo (puedes cambiarla)
+const ciudad = "Chitré,PA";
+
+// Función para obtener clima actual
+async function cargarClima() {
+    const climaInfo = document.getElementById("clima-info");
+    try {
+        const respuesta = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${ciudad}&units=metric&lang=es&appid=${weatherApiKey}`);
+        const datos = await respuesta.json();
+        climaInfo.innerHTML = `${datos.weather[0].description}, ${datos.main.temp}°C`;
+    } catch (error) {
+        climaInfo.innerHTML = "No se pudo obtener el clima.";
+    }
+}
+
+// Guardar anuncio
 async function guardarAnuncio(titulo, descripcion, contacto) {
     try {
         await addDoc(collection(db, "anuncios"), {
-            titulo: titulo,
-            descripcion: descripcion,
-            contacto: contacto,
+            titulo, descripcion, contacto,
             fecha: new Date().toLocaleString()
         });
         alert("Anuncio guardado correctamente!");
-        cargarAnuncios();  // Refrescamos la lista al guardar
+        cargarAnuncios();
     } catch (e) {
-        console.error("Error al guardar el anuncio: ", e);
-        alert("Hubo un error al guardar el anuncio.");
+        console.error("Error al guardar anuncio:", e);
+        alert("Error al guardar el anuncio.");
     }
 }
 
-// Función para cargar y mostrar anuncios desde Firestore
+// Cargar anuncios y elegir uno como destacado
 async function cargarAnuncios() {
     const contenedor = document.getElementById("lista-anuncios");
+    const anuncioDia = document.getElementById("anuncio-dia");
+
     contenedor.innerHTML = "<p>Cargando anuncios...</p>";
-
     try {
-        const querySnapshot = await getDocs(collection(db, "anuncios"));
-        contenedor.innerHTML = "";  // Limpiamos al recargar
+        const snapshot = await getDocs(collection(db, "anuncios"));
+        const anuncios = [];
 
-        querySnapshot.forEach((doc) => {
-            const anuncio = doc.data();
+        snapshot.forEach(doc => anuncios.push(doc.data()));
+
+        contenedor.innerHTML = "";
+        anuncios.forEach(anuncio => {
             const div = document.createElement("div");
-            div.classList.add("anuncio");
-            div.innerHTML = `
-                <h3>${anuncio.titulo}</h3>
-                <p>${anuncio.descripcion}</p>
-                <small>Contacto: ${anuncio.contacto}</small><br>
-                <small>Publicado: ${anuncio.fecha}</small>
-            `;
+            div.className = "anuncio";
+            div.innerHTML = `<h3>${anuncio.titulo}</h3><p>${anuncio.descripcion}</p><small>📞 ${anuncio.contacto}</small><br><small>${anuncio.fecha}</small>`;
             contenedor.appendChild(div);
         });
 
-        if (querySnapshot.empty) {
-            contenedor.innerHTML = "<p>No hay anuncios por ahora.</p>";
+        if (anuncios.length > 0) {
+            const destacado = anuncios[Math.floor(Math.random() * anuncios.length)];
+            anuncioDia.innerHTML = `<strong>${destacado.titulo}</strong><br>${destacado.descripcion}<br><small>Contacto: ${destacado.contacto}</small>`;
+        } else {
+            anuncioDia.innerHTML = "Aún no hay anuncios destacados.";
         }
-
     } catch (e) {
-        console.error("Error al cargar anuncios: ", e);
+        console.error("Error al cargar anuncios:", e);
         contenedor.innerHTML = "<p>Error al cargar anuncios.</p>";
+        anuncioDia.innerHTML = "Error al cargar anuncio destacado.";
     }
 }
 
-// Manejador para el formulario de nuevo anuncio
-document.getElementById("form-anuncio").addEventListener("submit", function(event) {
-    event.preventDefault();
-
+// Evento de formulario
+document.getElementById("form-anuncio").addEventListener("submit", (e) => {
+    e.preventDefault();
     const titulo = document.getElementById("titulo").value;
     const descripcion = document.getElementById("descripcion").value;
     const contacto = document.getElementById("contacto").value;
-
-    if (titulo && descripcion && contacto) {
-        guardarAnuncio(titulo, descripcion, contacto);
-        document.getElementById("form-anuncio").reset();
-    } else {
-        alert("Por favor completa todos los campos.");
-    }
+    guardarAnuncio(titulo, descripcion, contacto);
+    e.target.reset();
 });
 
-// Cargar anuncios al inicio
-window.onload = cargarAnuncios;
+// Cargar todo al inicio
+window.onload = () => {
+    cargarClima();
+    cargarAnuncios();
+};

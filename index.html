@@ -1,19 +1,74 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Azuero Busca</title>
+    <title>Azuero Busca - Compra y Venta en Azuero</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px; }
-        .anuncio { border: 1px solid #ccc; padding: 10px; margin: 5px 0; background-color: #fff; }
-        form input, form textarea { width: 100%; margin: 5px 0; padding: 8px; }
-        form button { padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer; }
-        form button:hover { background-color: #0056b3; }
+        body { 
+            font-family: Arial, sans-serif; 
+            background-color: #f0f8ff; 
+            padding: 20px; 
+            color: #333; 
+        }
+        header { 
+            background-color: #0074cc; 
+            color: white; 
+            padding: 15px; 
+            text-align: center; 
+            font-size: 24px; 
+            font-weight: bold;
+        }
+        .destacado { 
+            background-color: #ffcc00; 
+            padding: 10px; 
+            border: 2px solid #ff8800; 
+            margin: 15px 0; 
+            text-align: center; 
+            font-size: 18px;
+        }
+        .clima { 
+            background-color: #e6f7ff; 
+            padding: 10px; 
+            margin: 15px 0; 
+            border: 1px solid #0074cc; 
+        }
+        .anuncio { 
+            border: 1px solid #ccc; 
+            padding: 10px; 
+            margin: 5px 0; 
+            background-color: #fff; 
+        }
+        form input, form textarea { 
+            width: 100%; 
+            margin: 5px 0; 
+            padding: 8px; 
+        }
+        form button { 
+            padding: 10px 20px; 
+            background-color: #007bff; 
+            color: white; 
+            border: none; 
+            cursor: pointer; 
+        }
+        form button:hover { 
+            background-color: #0056b3; 
+        }
     </style>
     <script type="module" src="script.js"></script>
 </head>
 <body>
-    <h1>Azuero Busca - Publica tu Anuncio</h1>
+    <header>Azuero Busca - Compra, Venta y Anuncios Varios</header>
 
+    <div class="clima">
+        <h3>Clima en Azuero</h3>
+        <p id="clima-info">Cargando clima...</p>
+    </div>
+
+    <div class="destacado">
+        <h3>Anuncio del Día</h3>
+        <p id="anuncio-dia">Cargando anuncio destacado...</p>
+    </div>
+
+    <h2>Publica tu Anuncio</h2>
     <form id="form-anuncio">
         <input type="text" id="titulo" placeholder="Título del anuncio" required>
         <textarea id="descripcion" placeholder="Descripción" required></textarea>
