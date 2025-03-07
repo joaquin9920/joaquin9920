@@ -69,5 +69,3 @@ document.getElementById("form-anuncio").addEventListener("submit", function(even
 
 // Cargar anuncios al inicio
 window.onload = cargarAnuncios;
-
-

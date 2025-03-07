@@ -1,35 +1,27 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Azuero Busca - Compra Venta y Anuncios Varios</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Azuero Busca</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px; }
+        .anuncio { border: 1px solid #ccc; padding: 10px; margin: 5px 0; background-color: #fff; }
+        form input, form textarea { width: 100%; margin: 5px 0; padding: 8px; }
+        form button { padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer; }
+        form button:hover { background-color: #0056b3; }
+    </style>
+    <script type="module" src="script.js"></script>
 </head>
 <body>
-<header>
-    <h1>Azuero Busca</h1>
-    <nav>
-        <a href="#anuncios">Anuncios</a>
-        <a href="#clima">Clima</a>
-        <a href="#contacto">Contacto</a>
-    </nav>
-</header>
-<section id="anuncio-del-dia">
-    <h2>Anuncio Destacado</h2>
-    <div class="destacado">¡Oferta Especial de Hoy!</div>
-</section>
-<section id="anuncios">
+    <h1>Azuero Busca - Publica tu Anuncio</h1>
+
+    <form id="form-anuncio">
+        <input type="text" id="titulo" placeholder="Título del anuncio" required>
+        <textarea id="descripcion" placeholder="Descripción" required></textarea>
+        <input type="text" id="contacto" placeholder="Contacto (Teléfono o WhatsApp)" required>
+        <button type="submit">Publicar Anuncio</button>
+    </form>
+
     <h2>Anuncios Recientes</h2>
-    <p>Publica tu anuncio y llega a toda Azuero.</p>
-</section>
-<section id="clima">
-    <h2>Clima Actual</h2>
-    <p>Próximamente: Clima en tiempo real.</p>
-</section>
-<footer>
-    <p>&copy; 2025 Azuero Busca</p>
-</footer>
-<script src="script.js"></script>
+    <div id="lista-anuncios"></div>
 </body>
 </html>
