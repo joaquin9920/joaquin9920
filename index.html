@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,49 +6,115 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Azuero Busca - Compra y Venta</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f8f9fa; padding: 20px; color: #333; margin: 0; }
-        header { background-color: #0074cc; color: white; padding: 15px; text-align: left; font-size: 24px; font-weight: bold; display: flex; align-items: center; }
-        header img { height: 50px; margin-right: 15px; }
-        .banner-clima { background-color: #e6f7ff; text-align: center; padding: 10px; font-size: 18px; }
-        .destacado { background-color: #ffcc00; padding: 15px; text-align: center; font-size: 20px; font-weight: bold; animation: blink 1.5s infinite alternate; }
-        .anuncio { border: 1px solid #ccc; padding: 10px; margin: 10px 0; background-color: white; }
-        form input, form textarea { width: 100%; margin: 5px 0; padding: 8px; }
-        form button { padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer; }
-        form button:hover { background-color: #0056b3; }
-        .anuncio img { width: 100%; max-height: 200px; object-fit: cover; margin-top: 10px; }
-        .mapa { width: 100%; height: 200px; margin-top: 10px; }
-        @keyframes blink { 0% { opacity: 1; } 100% { opacity: 0.7; } }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #0074cc, #0056b3);
+            color: white;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .contenedor {
+            width: 90%;
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+        .anuncio {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #333;
+            padding: 15px;
+            margin: 20px auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-align: left;
+        }
+        .galeria img {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        input, textarea, button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #ffcc00;
+            color: #333;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #ffaa00;
+        }
+        .boton {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #0074cc;
+            color: white;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .boton:hover {
+            background-color: #0056b3;
+        }
+        @media (max-width: 600px) {
+            header {
+                font-size: 20px;
+                padding: 15px;
+            }
+            .contenedor {
+                width: 95%;
+            }
+        }
     </style>
-    <script type="module" src="script.js"></script>
 </head>
 <body>
-    <header>
-        <img src="azuero_busca_logo.png" alt="Azuero Busca Logo">
-        Azuero Busca - Compra, Venta y Servicios
-    </header>
+    <header>Azuero Busca - Compra, Venta y Servicios</header>
 
-    <div class="banner-clima">
-        <h3>Clima en Azuero</h3>
-        <p id="clima-info">Cargando clima...</p>
+    <div class="contenedor">
+        <h2>📢 Publica tu Anuncio</h2>
+        <form>
+            <input type="text" placeholder="Título del anuncio" required>
+            <textarea placeholder="Descripción" required></textarea>
+            <input type="text" placeholder="Contacto (Teléfono o WhatsApp)" required>
+            <input type="url" placeholder="Link de Instagram (opcional)">
+            <input type="url" placeholder="Link de Facebook (opcional)">
+            <input type="file" accept="image/*">
+            <button type="submit">Publicar Anuncio</button>
+        </form>
+
+        <h2>📌 Anuncios Recientes</h2>
+        <div class="anuncio">
+            <h3>Vendo Moto Scooter Yamaha</h3>
+            <div class="galeria">
+                <img src="https://via.placeholder.com/600x300.png?text=Moto+Scooter+Yamaha" alt="Moto Scooter en venta">
+            </div>
+            <p>Scooter Yamaha en excelente estado. Poco uso y bien mantenida. Lista para rodar.</p>
+            <p><strong>Precio:</strong> $1,500</p>
+            <p><strong>Ubicación:</strong> Chitré, Herrera</p>
+            <p><strong>Contacto:</strong> 📞 6000-5678</p>
+            <a href="https://instagram.com/motos_herrera" class="boton" target="_blank">📷 Instagram</a>
+            <a href="https://facebook.com/motos_herrera" class="boton" target="_blank">📘 Facebook</a>
+        </div>
     </div>
-
-    <div class="destacado">
-        <h3>Anuncio del Día</h3>
-        <p id="anuncio-dia">Cargando anuncio destacado...</p>
-    </div>
-
-    <h2>Publica tu Anuncio</h2>
-    <form id="form-anuncio">
-        <input type="text" id="titulo" placeholder="Título del anuncio" required>
-        <textarea id="descripcion" placeholder="Descripción" required></textarea>
-        <input type="text" id="contacto" placeholder="Contacto (Teléfono o WhatsApp)" required>
-        <input type="url" id="instagram" placeholder="Link de Instagram (opcional)">
-        <input type="url" id="facebook" placeholder="Link de Facebook (opcional)">
-        <input type="text" id="direccion" placeholder="Dirección o Ubicación">
-        <button type="submit">Publicar Anuncio</button>
-    </form>
-
-    <h2>Anuncios Recientes</h2>
-    <div id="lista-anuncios"></div>
 </body>
 </html>
