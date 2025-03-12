@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ConectAzuero - Compra, Venta y Servicios</title>
+
+    <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -37,6 +40,17 @@
         .boton:hover {
             background-color: #ffaa00;
         }
+        .clima {
+            background: linear-gradient(135deg, #ffcc00, #ff6600);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px auto;
+            display: inline-block;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -49,6 +63,8 @@
     </header>
 
     <h2>📌 Bienvenido a ConectAzuero</h2>
+
+    <div class="clima" id="clima">Cargando clima...</div>
 
     <div id="admin-section" style="display:none;">
         <h3>Panel de Administrador</h3>
@@ -68,6 +84,7 @@
     </div>
 
     <script>
+        // Configuración de Firebase
         const firebaseConfig = {
             apiKey: "TU_API_KEY",
             authDomain: "TU_AUTH_DOMAIN",
@@ -139,6 +156,14 @@
             alert("Anuncio publicado con éxito.");
             location.reload();
         }
+
+        function cargarClima() {
+            document.getElementById("clima").innerHTML = "🌞 Clima en Chitré: 28°C, Soleado ☀️";
+        }
+
+        window.onload = function () {
+            cargarClima();
+        };
     </script>
 </body>
 </html>
