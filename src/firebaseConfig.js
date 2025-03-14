@@ -3,12 +3,12 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "TU_API_KEY",
-  authDomain: "TU_AUTH_DOMAIN",
-  projectId: "TU_PROJECT_ID",
-  storageBucket: "TU_STORAGE_BUCKET",
-  messagingSenderId: "TU_MESSAGING_SENDER_ID",
-  appId: "TU_APP_ID"
+  apiKey: "AIzaSyBRpBidqt0vlgXbqqflqKZLnLPRBkA4Mvg",
+  authDomain: "azuero-busca.firebaseapp.com",
+  projectId: "azuero-busca",
+  storageBucket: "azuero-busca.firebasestorage.app",
+  messagingSenderId: "98932584649",
+  appId: "1:98932584649:web:359d64080ee95372ab5d18"
 };
 
 const app = initializeApp(firebaseConfig);
